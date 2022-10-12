@@ -24,6 +24,7 @@ body {
   height:500px;
   width: 100%
 }
+
 .swiper-slide{
   text-align: center;
   font-size: 18px;
@@ -41,4 +42,10 @@ body {
   -ms-flex-align: center;
   -webkit-align-items: center;
   align-items: center;
+}
+.well{
+  margin-bottom: 20px;
+  padding: 20px;
+  background: gainsboro;
+  
 }
