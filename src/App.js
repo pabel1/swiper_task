@@ -1,23 +1,72 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Navigation } from "swiper";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import { useState } from "react";
 function App() {
+  const [slideData] = useState([
+    "Slice 1",
+
+    "Slice 2",
+
+    "Slice 3",
+    "Slice 4",
+    "Slice 5",
+  ]);
+  const [swiperIndex, setSwiperIndex] = useState(slideData[0]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className="container">
+      <div>
+        <h1>Current Slider is {swiperIndex} </h1>
+      </div>
+      <div className="swiper-container">
+        <Swiper
+          modules={[Navigation]}
+          spaceBetween={30}
+          slidesPerView={2}
+          slidesPerGroup={2}
+          // slidesPerColumn={1}
+          navigation
+          onActiveIndexChange={(index) =>
+            setSwiperIndex(slideData[index.snapIndex])
+          }
+          onSlideChange={() => console.log("change slice")}
+          onSwiper={(swiper) => console.log(swiper)}
         >
-          Learn React
-        </a>
-      </header>
+          {slideData &&
+            slideData.map((item, index) => {
+              return (
+                <div key={index}>
+                  <div className="swiper-slide">
+                    <SwiperSlide key={index + 1}>
+                      <div className="col-md-6">
+                        <div className="well">{item}</div>
+                      </div>
+                    </SwiperSlide>
+                  </div>
+                  <SwiperSlide key={item}>
+                    <div className="swiper-slide">
+                      <div className="col-md-6">
+                        <div className="col-md-12">
+                          <div className="row">
+                            <div className="well">{item}a</div>
+                          </div>
+                        </div>
+                        <div className="col-md-12">
+                          <div className="row">
+                            <div className="well">{item}b</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </SwiperSlide>
+                </div>
+              );
+            })}
+        </Swiper>
+      </div>
     </div>
   );
 }
